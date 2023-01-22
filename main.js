@@ -3,6 +3,7 @@ const form = document.querySelector('form');
 let updateForm = document.querySelector('#update-form');
 let todosContainer = document.querySelector('.to-do');
 let headingEmpty = document.querySelector('h2');
+let context = document.querySelector('h1');
 let addToDo = document.querySelector('#add-to-do');
 let AllToDo = document.querySelector('#all-to-do');
 let incompleteToDo = document.querySelector('#incomplete');
@@ -18,6 +19,7 @@ if (todos.length > 0) {
     headingEmpty.style.display = 'block';
 }
 addToDo.addEventListener('click', () => {
+    context.innerText = 'Add To Do';
     headingEmpty.style.display = 'none';
     todosContainer.style.display = 'none';
     form.style.display = 'block';
@@ -25,6 +27,7 @@ addToDo.addEventListener('click', () => {
 
 AllToDo.addEventListener('click', () => {
     if (todos.length > 0) {
+        context.innerText = 'All To Do';
         headingEmpty.style.display = 'none';
         todosContainer.style.display = 'flex';
         form.style.display = 'none';
@@ -98,6 +101,7 @@ const deleteTodo = (id) => {
  * */
 const displayTodos = () => {
     if (todos.length > 0) {
+        context.innerText = 'All To Do';
         headingEmpty.style.display = 'none';
         updateForm.style.display = 'none';
         const todosContainer = document.querySelector('.to-do');
@@ -161,6 +165,7 @@ const updateTodo = (id) => {
     updateForm.style.display = 'block';
     todosContainer.style.display = 'none';
     headingEmpty.style.display = 'none';
+    context.innerText = 'Update To Do';
     form.style.display = 'none';
 }
 
@@ -177,6 +182,7 @@ updateForm.addEventListener('submit', (e) => {
     todo.date = date;
     todo.DateCompleted = null;
     updateForm.style.display = 'none';
+    
     displayTodos();
 })
 /**
@@ -213,6 +219,7 @@ const incomplete = (id) => {
 const showIncomplete = () => {
     if (todos.length > 0) {
         headingEmpty.style.display = 'none';
+        context.innerText = 'Incomplete To Do';
         form.style.display = 'none';
         updateForm.style.display = 'none';
         const todosContainer = document.querySelector('.to-do');
@@ -260,6 +267,7 @@ const showIncomplete = () => {
     } else {
         todosContainer.style.display = 'none';
         headingEmpty.style.display = 'block';
+        context.innerText = 'Incomplete To Do';
         headingEmpty.innerText = 'No Incomplete Todos';
         form.style.display = 'none';
         updateForm.style.display = 'none';
@@ -273,6 +281,7 @@ const showIncomplete = () => {
 const showComplete = () => {
     if (todos.length > 0) {
         headingEmpty.style.display = 'none';
+        context.innerText = 'Complete To Do';
         form.style.display = 'none';
         updateForm.style.display = 'none';
         const todosContainer = document.querySelector('.to-do');
@@ -320,6 +329,7 @@ const showComplete = () => {
         }
 
     } else {
+        context.innerText = 'Complete To Do';
         todosContainer.style.display = 'none';
         headingEmpty.style.display = 'block';
         headingEmpty.innerText = 'No Complete Todos';
