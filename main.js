@@ -31,6 +31,7 @@ AllToDo.addEventListener('click', () => {
         displayTodos();
     } else {
         todosContainer.style.display = 'none';
+        headingEmpty.innerText = 'Your to do is empty';
         headingEmpty.style.display = 'block';
         form.style.display = 'none';
     }
@@ -98,6 +99,7 @@ const deleteTodo = (id) => {
 const displayTodos = () => {
     if (todos.length > 0) {
         headingEmpty.style.display = 'none';
+        updateForm.style.display = 'none';
         const todosContainer = document.querySelector('.to-do');
         todosContainer.innerHTML = '';
         todos.forEach(todo => {
@@ -135,6 +137,9 @@ const displayTodos = () => {
     } else {
         todosContainer.style.display = 'none';
         headingEmpty.style.display = 'block';
+       
+        
+
     }
 
 }
@@ -181,6 +186,7 @@ updateForm.addEventListener('submit', (e) => {
  * @param {Number} id 
  */
 const complete = (id) => {
+    
     let todo = todos.find(todo => todo.id === id);
     todo.complete = true;
     todo.DateCompleted = new Date();
