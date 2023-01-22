@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>To do </title>
+</head>
+
+<body>
+    <script src="main.js" defer></script>
+
+    <!-- create nav where we can go to adding form -->
+    <nav>
+        <ul>
+            <li><button id="all-to-do">All To Do</button></li>
+            <li><button id="add-to-do">Add To Do</button></li>
+            <li><button id="complete">Completed</button></li>
+            <li><button id="incomplete">Incomplete</button></li>
+
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Todo App</h1>
+        <h2>Your to do is empty </h2>
+       
+        <div class="to-do">
+
+        </div>
+
+        <div class="to-do-form">
+            <form method="POST">
+                <div class="input-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" placeholder="Title" required>
+                </div>
+                <div class="input-group">
+                    <label for="description">Description</label>
+                    <input type="text" name="description" placeholder="Description" required>
+                </div>
+                <div class="input-group">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" placeholder="Date" required>
+                </div>
+                <button type="submit">Create</button>
+            </form>
+        </div>
+        <div class="to-do-form">
+            <form method="POST" id="update-form">
+                <div class="input-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" placeholder="Title" required>
+                </div>
+                <div class="input-group">
+                    <label for="description">Description</label>
+                    <input type="text" name="description" placeholder="Description" required>
+                </div>
+                <div class="input-group">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" placeholder="Date" required>
+                </div>
+                <input type="hidden" name="id">
+                <button type="submit">Update</button>
+            </form>
+        </div>
+       
+    </div>
+
+</body>
+
+</html>
