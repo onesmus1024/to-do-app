@@ -36,9 +36,12 @@ AllToDo.addEventListener('click', () => {
     }
 })
 
-
-// generate a random id
+/**
+ * 
+ * @returns 
+ */
 const generateId = () => {
+    
     return Math.floor(Math.random() * 100000000);
 }
 
@@ -64,20 +67,34 @@ form.addEventListener('submit', (e) => {
     form.style.display = 'none';
 })
 
-// create function to delete all todos
+/**
+ * 
+ * empty the todos array
+ * Hide the todos container
+ * Show the heading
+ * 
+ */
 const deleteAll = () => {
     todos = [];
     todosContainer.style.display = 'none';
     headingEmpty.style.display = 'block';
 }
 
-// create function to delete a single todo
+/**
+ * 
+ * @param {Number} id The id of todo to be deleted
+ */
 const deleteTodo = (id) => {
     todos = todos.filter(todo => todo.id !== id);
     displayTodos();
 }
 
-// display all todos in the DOM
+/**
+ * Display the todos in the DOM
+ * hide the heading if there are todos
+ * hide the todos container if there are no todos
+ * 
+ * */
 const displayTodos = () => {
     if (todos.length > 0) {
         headingEmpty.style.display = 'none';
@@ -95,11 +112,11 @@ const displayTodos = () => {
               
                 ${todo.DateCompleted ? new Date(todo.DateCompleted) - new Date(todo.date) >0 ? `<div class="days">
                 <h2>late by </h2> ${todo.DateCompleted ? Math.abs(Math.floor((new Date(todo.DateCompleted) - new Date(todo.date)) / (1000 * 60 * 60 * 24)) ): '0'} days
-            </div>`: `<div class="days">
-            <h2>earlier by</h2> ${todo.DateCompleted ? Math.abs(Math.floor((new Date(todo.DateCompleted) - new Date(todo.date)) / (1000 * 60 * 60 * 24)) ): '0'} days
-        </div>`: `<div class="days">
-        ${Math.floor(( new Date(todo.date)-new Date()) / (1000 * 60 * 60 * 24))<0?`<h2>late by </h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days`:`<h2>Days left</h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days` }
-    </div>`}
+                </div>`: `<div class="days">
+                <h2>earlier by</h2> ${todo.DateCompleted ? Math.abs(Math.floor((new Date(todo.DateCompleted) - new Date(todo.date)) / (1000 * 60 * 60 * 24)) ): '0'} days
+                </div>`: `<div class="days">
+                ${Math.floor(( new Date(todo.date)-new Date()) / (1000 * 60 * 60 * 24))<0?`<h2>late by </h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days`:`<h2>Days left</h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days` }
+                </div>`}
 
                 <div class="complete">
                     <h2>Mark</h2> ${todo.complete ? `<button onclick="incomplete(${todo.id})">Incomplete</button>` : `<button onclick="complete(${todo.id})">Complete</button>`}
@@ -121,7 +138,15 @@ const displayTodos = () => {
     }
 
 }
-
+/**
+ * Update the todo
+ * populate the form with the todo details
+ * hide the todos container
+ * hide the heading
+ * show the form
+ * @param {Number} id The id of the be updated
+ * 
+ */
 const updateTodo = (id) => {
     let todo = todos.find(todo => todo.id === id);
     updateForm.title.value = todo.title;
@@ -133,6 +158,7 @@ const updateTodo = (id) => {
     headingEmpty.style.display = 'none';
     form.style.display = 'none';
 }
+
 
 updateForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -148,7 +174,12 @@ updateForm.addEventListener('submit', (e) => {
     updateForm.style.display = 'none';
     displayTodos();
 })
-
+/**
+ * mark the todo as complete
+ * set the date completed to the current date
+ * display the todos
+ * @param {Number} id 
+ */
 const complete = (id) => {
     let todo = todos.find(todo => todo.id === id);
     todo.complete = true;
@@ -156,6 +187,13 @@ const complete = (id) => {
     displayTodos();
 }
 
+/**
+ * mark the todo as incomplete
+ * set the date completed to null
+ * display the todos
+ * 
+ * @param {Number} id 
+ */
 const incomplete = (id) => {
     let todo = todos.find(todo => todo.id === id);
     todo.complete = false;
@@ -163,7 +201,9 @@ const incomplete = (id) => {
     displayTodos();
 }
 
-
+/**
+ * show the todos that are incomplete and or message that there are no incomplete todos
+ */
 const showIncomplete = () => {
     if (todos.length > 0) {
         headingEmpty.style.display = 'none';
@@ -219,7 +259,11 @@ const showIncomplete = () => {
         updateForm.style.display = 'none';
     }
 }
-
+/**
+ * show the todos that are complete and or message that there are no complete todos
+ * 
+ * 
+ */
 const showComplete = () => {
     if (todos.length > 0) {
         headingEmpty.style.display = 'none';
@@ -242,11 +286,11 @@ const showComplete = () => {
                       
                         ${todo.DateCompleted ? new Date(todo.DateCompleted) - new Date(todo.date) >0 ? `<div class="days">
                         <h2>late by </h2> ${todo.DateCompleted ? Math.abs(Math.floor((new Date(todo.DateCompleted) - new Date(todo.date)) / (1000 * 60 * 60 * 24)) ): '0'} days
-                    </div>`: `<div class="days">
-                    <h2>earlier by</h2> ${todo.DateCompleted ? Math.abs(Math.floor((new Date(todo.DateCompleted) - new Date(todo.date)) / (1000 * 60 * 60 * 24)) ): '0'} days
-                </div>`: `<div class="days">
-                ${Math.floor(( new Date(todo.date)-new Date()) / (1000 * 60 * 60 * 24))<0?`<h2>late by </h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days`:`<h2>Days left</h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days` }
-            </div>`}
+                        </div>`: `<div class="days">
+                        <h2>earlier by</h2> ${todo.DateCompleted ? Math.abs(Math.floor((new Date(todo.DateCompleted) - new Date(todo.date)) / (1000 * 60 * 60 * 24)) ): '0'} days
+                        </div>`: `<div class="days">
+                        ${Math.floor(( new Date(todo.date)-new Date()) / (1000 * 60 * 60 * 24))<0?`<h2>late by </h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days`:`<h2>Days left</h2> ${Math.abs(Math.floor((new Date(todo.date) - new Date()) / (1000 * 60 * 60 * 24)) )} days` }
+                        </div>`}
         
                         <div class="complete">
                             <h2>Mark</h2> ${todo.complete ? `<button onclick="incomplete(${todo.id})">Incomplete</button>` : `<button onclick="complete(${todo.id})">Complete</button>`}
