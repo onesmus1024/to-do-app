@@ -57,15 +57,15 @@ form.addEventListener('submit', (e) => {
     const description = form.description.value;
     const date = form.date.value;
     // check date error
-    if (new Date(date) - new Date() < 0) {
-        dateError.style.display = 'block';
-        dateError.innerText = 'Date must be greater than today';
-        dateError.style.color = 'red';
+    // if (new Date(date) - new Date() < 0) {
+    //     dateError.style.display = 'block';
+    //     dateError.innerText = 'Date must be greater than today';
+    //     dateError.style.color = 'red';
         
-        return;
-    } else {
-        dateError.style.display = 'none';
-    }
+    //     return;
+    // } else {
+    //     dateError.style.display = 'none';
+    // }
     // create a to do array of objects
     const todo = {
         id: generateId(),
@@ -187,15 +187,15 @@ updateForm.addEventListener('submit', (e) => {
     let description = updateForm.description.value;
     let date = updateForm.date.value;
     let id = Number(updateForm.id.value);
-    if (new Date(date) - new Date() < 0) {
-        updateDateError.style.display = 'block';
-        updateDateError.innerText = 'Date must be greater than today';
-        updateDateError.style.color = 'red';
+    // if (new Date(date) - new Date() < 0) {
+    //     updateDateError.style.display = 'block';
+    //     updateDateError.innerText = 'Date must be greater than today';
+    //     updateDateError.style.color = 'red';
         
-        return;
-    } else {
-        updateDateError.style.display = 'none';
-    }
+    //     return;
+    // } else {
+    //     updateDateError.style.display = 'none';
+    // }
     let todo = todos.find(todo => todo.id === id);
     todo.title = title;
     todo.description = description;
@@ -217,6 +217,7 @@ const complete = (id) => {
     todo.complete = true;
     todo.DateCompleted = new Date();
     displayTodos();
+    
 }
 
 /**
