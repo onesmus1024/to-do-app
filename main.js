@@ -8,8 +8,10 @@ let addToDo = document.querySelector('#add-to-do');
 let AllToDo = document.querySelector('#all-to-do');
 let incompleteToDo = document.querySelector('#incomplete');
 let completeToDo = document.querySelector('#complete');
-
+let dateError = document.querySelector('#date-error');
+let updateDateError = document.querySelector('#update-date-error');
 let todos = [];
+
 
 if (todos.length > 0) {
     todosContainer.style.display = 'flex';
@@ -54,6 +56,16 @@ form.addEventListener('submit', (e) => {
     const title = form.title.value;
     const description = form.description.value;
     const date = form.date.value;
+    // check date error
+    if (new Date(date) - new Date() < 0) {
+        dateError.style.display = 'block';
+        dateError.innerText = 'Date must be greater than today';
+        dateError.style.color = 'red';
+        
+        return;
+    } else {
+        dateError.style.display = 'none';
+    }
     // create a to do array of objects
     const todo = {
         id: generateId(),
@@ -106,8 +118,7 @@ const displayTodos = () => {
         updateForm.style.display = 'none';
         const todosContainer = document.querySelector('.to-do');
         todosContainer.innerHTML = '';
-        todos.forEach(todo => {
-            const todoHTML = `
+        todos.forEach(todo => {const todoHTML = `
             <div class="todo">
                 <h3> <h2>Title</h2> ${todo.title}</h3>
                 <p> <h2>Description</h2> ${todo.description}</p>
@@ -132,9 +143,9 @@ const displayTodos = () => {
                 <button onclick="deleteTodo(${todo.id})">Delete</button>
                 <button onclick="deleteAll()">delete all</button>
                 </div>
-                
             </div>
             `
+            
             todosContainer.innerHTML += todoHTML;
             todosContainer.style.display = 'flex';
         })
@@ -176,6 +187,15 @@ updateForm.addEventListener('submit', (e) => {
     let description = updateForm.description.value;
     let date = updateForm.date.value;
     let id = Number(updateForm.id.value);
+    if (new Date(date) - new Date() < 0) {
+        updateDateError.style.display = 'block';
+        updateDateError.innerText = 'Date must be greater than today';
+        updateDateError.style.color = 'red';
+        
+        return;
+    } else {
+        updateDateError.style.display = 'none';
+    }
     let todo = todos.find(todo => todo.id === id);
     todo.title = title;
     todo.description = description;
@@ -340,4 +360,3 @@ const showComplete = () => {
 
 incompleteToDo.addEventListener('click', showIncomplete)
 completeToDo.addEventListener('click', showComplete)
-
